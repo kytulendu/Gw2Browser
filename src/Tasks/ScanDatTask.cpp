@@ -350,9 +350,13 @@ namespace gw2b {
         case ANFT_AudioScript:
             MakeCategory( wxT( "Audio Scripts" ) );
             break;
-        case ANFT_Model:
-            MakeCategory( wxT( "Models" ) );
-            break;
+		case ANFT_Model: 
+		{
+			MakeCategory(wxT("Models"));
+			uint baseId = m_datFile.baseIdFromFileNum(this->currentProgress());
+			MakeSubCategory(wxString::Format(wxT("%i"), ((uint32)baseId / 10000)) + wxT("xxxx"));
+			break;
+		}
         case ANFT_ModelCollisionManifest:
             MakeCategory( wxT( "Model Collision Manifest" ) );
             break;

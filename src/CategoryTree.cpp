@@ -269,7 +269,24 @@ namespace gw2b {
         while ( child.IsOk( ) ) {
             auto text = this->GetItemText( child );
             // Compare
-            if ( text > p_displayName ) {
+			// If both start with number compare them as numbers
+			if (text.length() > 0 && p_displayName.length() > 0 && std::isdigit(text.GetChar(0)) && std::isdigit(p_displayName.GetChar(0))) {
+				if (text.length() > p_displayName.length()) {
+					break;
+				}
+				if (text.length() == p_displayName.length()) {
+					for (size_t i = 0; i < text.length(); i++) {
+						if (text.GetChar(i) > p_displayName.GetChar(i)) {
+							goto CompareCategoryNestedBreak;
+						}
+						else if (text.GetChar(i) < p_displayName.GetChar(i)) {
+							break;
+						}
+					}
+				}
+			}
+			// Else as string
+            else if ( text > p_displayName ) {
                 break;
             }
             // Categories have nullptr item data
@@ -281,6 +298,7 @@ namespace gw2b {
             previous = child;
             child = this->GetNextChild( p_parent, cookie );
         }
+		CompareCategoryNestedBreak:
 
         // This item should be first if there *is* something in this list, but previous is nothing
         if ( child.IsOk( ) && !previous.IsOk( ) ) {
