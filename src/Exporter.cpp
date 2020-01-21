@@ -750,6 +750,8 @@ namespace gw2b {
         for ( uint i = 0; i < model.numMeshes( ); i++ ) {
             const GW2Mesh& mesh = model.mesh( i );
 
+			if (mesh.materialIndex == -1) continue;
+
             materialName[mesh.materialIndex] = mesh.materialName.c_str( );
         }
 
