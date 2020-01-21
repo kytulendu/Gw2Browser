@@ -160,7 +160,7 @@ namespace gw2b {
 
                 auto ref = reinterpret_cast<const ANetFileReference*>( ( (unsigned char*)&fnt.fileNames[y] ) + fnt.fileNames[y] );
                 auto fileId = DatFile::fileIdFromFileReference( *ref );
-                auto entryNumber = m_datFile.entryNumFromFileId( fileId );
+                auto entryNumber = m_datFile.entryNumFromFileOrBaseId( fileId );
                 auto fileData = m_datFile.readEntry( entryNumber );
                 if ( !fileData.GetSize( ) ) {
                     wxLogMessage( wxT( "File id %d is empty or not exist." ), fileId );

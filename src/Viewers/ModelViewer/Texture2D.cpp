@@ -34,7 +34,7 @@ namespace gw2b {
     Texture2D::Texture2D( DatFile& p_datFile, const uint p_fileId, const GLenum p_textureType, const GLint p_wrapS, const GLint p_wrapT, const bool p_anisotropic )
         : m_fileId( p_fileId )
         , m_textureType( p_textureType ) {
-        auto entryNumber = p_datFile.entryNumFromFileId( p_fileId );
+        auto entryNumber = p_datFile.entryNumFromFileOrBaseId( p_fileId );
         auto fileData = p_datFile.readEntry( entryNumber );
 
         // Bail if read failed

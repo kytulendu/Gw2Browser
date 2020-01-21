@@ -179,17 +179,24 @@ namespace gw2b {
         return this->entrySize( p_fileNum + MFT_FILE_OFFSET );
     }
 
-    uint DatFile::entryNumFromFileId( uint p_fileId ) const {
-        if ( !isOpen( ) ) {
-            return std::numeric_limits<uint>::max( );
-        }
-        for ( uint i = 0; i < m_entryToId.GetSize( ); i++ ) {
-            uint fileId = ( m_entryToId[i].fileId == 0 ? m_entryToId[i].baseId : m_entryToId[i].fileId );
-            if ( fileId == p_fileId ) {
-                return i;
-            }
-        }
-        return std::numeric_limits<uint>::max( );
+    uint DatFile::entryNumFromFileOrBaseId( uint p_Id ) const {
+		if (!isOpen()) {
+			return std::numeric_limits<uint>::max();
+		}
+
+		for (uint i = 0; i < m_entryToId.GetSize(); i++) {
+			uint fileId = (m_entryToId[i].fileId == 0 ? m_entryToId[i].baseId : m_entryToId[i].fileId);
+			if (fileId == p_Id) {
+				return i;
+			}
+		}
+		
+		for (uint i = 0; i < m_entryToId.GetSize(); i++) {
+			if (m_entryToId[i].baseId == p_Id) {
+				return i;
+			}
+		}
+		return std::numeric_limits<uint>::max();
     }
 
     uint DatFile::fileIdFromEntryNum( uint p_entryNum ) const {
@@ -204,18 +211,6 @@ namespace gw2b {
 
     uint DatFile::fileIdFromFileNum( uint p_fileNum ) const {
         return this->fileIdFromEntryNum( p_fileNum + MFT_FILE_OFFSET );
-    }
-
-    uint DatFile::entryNumFromBaseId( uint p_baseId ) const {
-        if ( !isOpen( ) ) {
-            return std::numeric_limits<uint>::max( );
-        }
-        for ( uint i = 0; i < m_entryToId.GetSize( ); i++ ) {
-            if ( m_entryToId[i].baseId == p_baseId ) {
-                return i;
-            }
-        }
-        return std::numeric_limits<uint>::max( );
     }
 
     uint DatFile::baseIdFromEntryNum( uint p_entryNum ) const {

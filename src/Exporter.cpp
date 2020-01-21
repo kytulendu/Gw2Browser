@@ -1015,7 +1015,7 @@ namespace gw2b {
     }
 
     void Exporter::exportModelTexture( uint32 p_fileid ) {
-        auto entryNumber = m_datFile.entryNumFromFileId( p_fileid );
+        auto entryNumber = m_datFile.entryNumFromFileOrBaseId( p_fileid );
         auto fileData = m_datFile.readEntry( entryNumber );
 
         // Bail if read failed

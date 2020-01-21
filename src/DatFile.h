@@ -82,7 +82,7 @@ namespace gw2b {
         /** Gets the MFT entry number for the file with the given file id.
         *  \param[in]  p_fileId     ID of the file to get the entry number for.
         *  \return uint    The MFT entry num if it was found, UINT_MAX if not. */
-        uint entryNumFromFileId( uint p_fileId ) const;
+        uint entryNumFromFileOrBaseId( uint p_fileId ) const;
         /** Gets the file ID of the file with the given MFT entry number.
         *  \param[in]  p_entryNum   Entry number to get the file ID for.
         *  \return uint    The file ID if it was found, UINT_MAX if not. */
@@ -92,10 +92,6 @@ namespace gw2b {
         *  \return uint    The file ID if it was found, UINT_MAX if not. */
         uint fileIdFromFileNum( uint p_entryNum ) const;
 
-        /** Gets the MFT entry number for the file with the given base id.
-        *  \param[in]  p_baseId     Base ID of the file to get the entry number for.
-        *  \return uint    The MFT entry num if it was found, UINT_MAX if not. */
-        uint entryNumFromBaseId( uint p_baseId ) const;
         /** Gets the base id of the file with the given MFT entry number.
         *  \param[in]  p_entryNum   Entry number to get the base id for.
         *  \return uint    The base id if it was found, UINT_MAX if not. */
